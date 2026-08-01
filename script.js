@@ -7,6 +7,7 @@ const pad = (number, length = 2) => String(Math.max(0, number)).padStart(length,
 const siteHeader = document.querySelector(".site-header");
 const menuToggle = document.getElementById("menuToggle");
 const mainNavigation = document.getElementById("mainNavigation");
+const headerDays = document.getElementById("headerDays");
 
 function closeSectionMenu() {
   siteHeader.classList.remove("menu-open");
@@ -29,11 +30,19 @@ document.addEventListener("keydown", event => {
   if (event.key === "Escape") closeSectionMenu();
 });
 
+function updateStickyHeader() {
+  siteHeader.classList.toggle("scrolled", window.scrollY > 280);
+}
+
+updateStickyHeader();
+window.addEventListener("scroll", updateStickyHeader, { passive: true });
+
 function updateCountdown() {
   const distance = RELEASE_DATE.getTime() - Date.now();
 
   if (distance <= 0) {
     document.getElementById("days").textContent = "000";
+    headerDays.textContent = "000";
     document.getElementById("hours").textContent = "00";
     document.getElementById("minutes").textContent = "00";
     document.getElementById("seconds").textContent = "00";
@@ -46,6 +55,7 @@ function updateCountdown() {
   const seconds = Math.floor((distance % 60000) / 1000);
 
   document.getElementById("days").textContent = pad(days, 3);
+  headerDays.textContent = pad(days, 3);
   document.getElementById("hours").textContent = pad(hours);
   document.getElementById("minutes").textContent = pad(minutes);
   document.getElementById("seconds").textContent = pad(seconds);
@@ -137,7 +147,7 @@ const observer = new IntersectionObserver(
       observer.unobserve(entry.target);
     }
   }),
-  { threshold: 0.12 }
+  { threshold: 0.06, rootMargin: "0px 0px -10% 0px" }
 );
 
 document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
