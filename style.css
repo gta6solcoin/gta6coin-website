@@ -249,6 +249,23 @@ h2 { font-size: clamp(38px, 5vw, 66px); line-height: 1; letter-spacing: -.05em; 
 .identity-info { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding: 12px; }
 .identity-info span { color: var(--muted); }
 .identity-info strong { text-align: right; }
+.takeover-visual {
+  position: relative; min-height: 360px; margin: 90px 0 0; overflow: hidden;
+  border: 1px solid rgba(255,125,191,.28); border-radius: 32px;
+  background: #160820; box-shadow: 0 40px 100px rgba(0,0,0,.42), 0 0 55px rgba(255,44,152,.12);
+}
+.takeover-visual::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(7,4,17,.02) 35%, rgba(7,4,17,.9) 100%), linear-gradient(90deg, rgba(7,4,17,.18), transparent 42%);
+}
+.takeover-visual img { width: 100%; height: 100%; min-height: 360px; aspect-ratio: 16 / 9; object-fit: cover; }
+.takeover-visual figcaption { position: absolute; z-index: 1; left: clamp(22px,4vw,52px); right: 22px; bottom: clamp(22px,4vw,46px); }
+.takeover-visual figcaption span { display: block; margin-bottom: 9px; color: #ff9ed2; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.takeover-visual figcaption strong {
+  display: block; width: fit-content; font: 700 clamp(30px,4vw,54px)/1 "Space Grotesk"; letter-spacing: -.045em;
+  color: transparent; background: linear-gradient(90deg, #fff, #ff76bd 48%, #9c82ff); -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 3px 18px rgba(0,0,0,.72));
+}
 
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .step-card {
@@ -424,6 +441,9 @@ h2 { font-size: clamp(38px, 5vw, 66px); line-height: 1; letter-spacing: -.05em; 
   .time-card strong { font-size: 56px; }
   .section { padding: 85px 18px; }
   .identity-card img { width: 135px; height: 135px; }
+  .takeover-visual { min-height: 410px; margin-top: 70px; border-radius: 23px; }
+  .takeover-visual img { min-height: 410px; aspect-ratio: auto; object-position: 56% center; }
+  .takeover-visual::after { background: linear-gradient(180deg, rgba(7,4,17,.02) 28%, rgba(7,4,17,.92) 100%); }
   .radio { right: 16px; bottom: 16px; }
   .radio-fab { min-width: 190px; min-height: 60px; }
   .radio-fab-icon { width: 40px; height: 40px; }
