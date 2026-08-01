@@ -15,7 +15,7 @@
   <link rel="prefetch" href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a?embed=1&amp;theme=dark&amp;trades=0&amp;info=0" as="document" />
   <link rel="icon" type="image/png" href="assets/logo.png?v=2" />
   <link rel="apple-touch-icon" href="assets/logo.png?v=2" />
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=13" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -30,8 +30,9 @@
 
     <nav class="header-nav" id="mainNavigation" aria-label="Main navigation">
       <a href="#countdown">Countdown</a>
-      <a href="#market">Chart</a>
-      <a href="#about">About</a>
+      <a href="#cto-strength">CTO Strength</a>
+      <a href="#market">Live Market</a>
+      <a href="#about">Story</a>
       <a href="#how-to-buy">How to buy</a>
     </nav>
 
@@ -43,6 +44,7 @@
       <a class="platform-x" href="https://x.com/GTA_6_Sol" target="_blank" rel="noopener noreferrer" aria-label="Follow GTA6 Coin on X">X</a>
       <a class="platform-telegram" href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer" aria-label="Join GTA6 Coin on Telegram">Telegram</a>
       <a class="header-dex" href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer">Dexscreener ↗</a>
+      <a class="header-buy" href="https://axiom.trade/t/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer">Buy $GTA6</a>
     </div>
   </header>
 
@@ -84,11 +86,12 @@
             <div class="time-card"><strong id="seconds">00</strong><span>Seconds</span></div>
           </div>
           <p class="release-note">Target date: 19 November 2026</p>
+          <p class="hero-tagline">The community-led GTA 6 Coin on Solana.</p>
         </div>
 
         <div class="hero-utility">
           <div class="hero-actions">
-            <a class="button button-primary" href="#market">View chart</a>
+            <a class="button button-primary" href="https://axiom.trade/t/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer">Buy $GTA6</a>
             <a class="button button-ghost" href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer">Join Telegram</a>
           </div>
 
@@ -97,22 +100,58 @@
               <span class="contract-label">Solana contract address</span>
               <code id="contract">EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump</code>
             </div>
-            <button class="copy-button" id="copyContract" type="button" aria-label="Copy contract address"><span id="copyText">Copy</span></button>
+            <button class="copy-button" id="copyContract" data-copy-contract type="button" aria-label="Copy contract address"><span>Copy</span></button>
           </div>
         </div>
       </div>
 
     </section>
 
-    <section class="section cto-intro-section">
+    <section class="section cto-intro-section" id="cto-strength">
       <div class="cto-intro reveal">
         <div class="eyebrow"><span></span> Community Takeover on Solana</div>
-        <h2>The countdown belongs to the <em>community.</em></h2>
+        <h2>Built by the community.<br /><em>Secured on-chain.</em></h2>
         <p>
           GTA 6 Coin is the community-powered memecoin built around the anticipation,
           culture and unstoppable momentum of the next era.
         </p>
+        <p class="cto-confidence">
+          With locked liquidity, revoked mint authority and more than 11,000 holders,
+          the foundation is already in place. Now the community is building the momentum.
+        </p>
       </div>
+
+      <div class="cto-proof-grid">
+        <article class="cto-proof-card reveal">
+          <span class="cto-proof-number">99%+</span>
+          <h3>LP locked</h3>
+          <p>More than 99% of the tracked liquidity-provider position is locked.</p>
+          <a href="https://rugcheck.xyz/tokens/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer">Verify on RugCheck ↗</a>
+        </article>
+
+        <article class="cto-proof-card reveal">
+          <span class="cto-proof-number">Revoked</span>
+          <h3>Mint authority</h3>
+          <p>The token supply cannot be increased through the original mint authority.</p>
+          <a href="https://rugcheck.xyz/tokens/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer">Verify on RugCheck ↗</a>
+        </article>
+
+        <article class="cto-proof-card reveal">
+          <span class="cto-proof-number">11,000+</span>
+          <h3>Unique holders</h3>
+          <p>One of the largest GTA 6 token communities on Solana stands behind the CTO.</p>
+          <a href="https://solscan.io/token/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump#holders" target="_blank" rel="noopener noreferrer">View holders on Solscan ↗</a>
+        </article>
+
+        <article class="cto-proof-card reveal">
+          <span class="cto-proof-number">Live</span>
+          <h3>Market liquidity</h3>
+          <p>Liquidity and trading activity remain publicly visible in real time.</p>
+          <a href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer">View on Dexscreener ↗</a>
+        </article>
+      </div>
+
+      <p class="cto-proof-note">On-chain and market figures change over time. Follow the verification links for current data.</p>
     </section>
 
     <section class="section market-section" id="market">
@@ -121,6 +160,16 @@
         <h2>Follow the market</h2>
         <p>Live price action and trading data powered by Dexscreener.</p>
       </div>
+
+      <div class="market-stats reveal" aria-label="Live GTA6 market statistics">
+        <article><span>Price</span><strong id="marketPrice">Loading…</strong></article>
+        <article><span>Market cap</span><strong id="marketCap">Loading…</strong></article>
+        <article><span>Liquidity</span><strong id="marketLiquidity">Loading…</strong></article>
+        <article><span>24h volume</span><strong id="marketVolume">Loading…</strong></article>
+        <article><span>24h change</span><strong id="marketChange">Loading…</strong></article>
+        <article><span>Holders</span><strong>11,000+</strong></article>
+      </div>
+      <p class="market-updated" id="marketUpdated" aria-live="polite">Connecting to live market data…</p>
 
       <div class="chart-card reveal">
         <div class="chart-card-header">
@@ -204,10 +253,22 @@
         </article>
       </div>
 
-      <div class="center reveal">
-        <a class="button button-primary" href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer">
-          Open DexScreener
-        </a>
+      <div class="trade-panel reveal">
+        <div class="trade-panel-heading">
+          <div class="eyebrow"><span></span> Trade and verify</div>
+          <h3>Choose your route.</h3>
+          <p>Always verify the contract address before connecting a wallet or making a trade.</p>
+        </div>
+        <div class="trade-contract">
+          <span>Official Solana contract</span>
+          <code>EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump</code>
+          <button class="copy-button" data-copy-contract type="button" aria-label="Copy official contract address"><span>Copy contract</span></button>
+        </div>
+        <div class="trade-actions">
+          <a class="trade-action trade-axiom" href="https://axiom.trade/t/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer"><span>Trade</span><strong>Buy on Axiom ↗</strong></a>
+          <a class="trade-action trade-dex" href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer"><span>Market data</span><strong>Open Dexscreener ↗</strong></a>
+          <a class="trade-action trade-solscan" href="https://solscan.io/token/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer"><span>On-chain</span><strong>Verify on Solscan ↗</strong></a>
+        </div>
       </div>
     </section>
 
@@ -219,11 +280,14 @@
           <p>Follow updates, meet the holders and help shape the next stage of the CTO.</p>
         </div>
         <div class="community-actions">
-          <a class="social-link" href="https://x.com/GTA_6_Sol" target="_blank" rel="noopener noreferrer">
-            <span>X</span><strong>@GTA_6_Sol</strong>
+          <a class="social-link social-buy" href="https://axiom.trade/t/EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump" target="_blank" rel="noopener noreferrer">
+            <span>Trade</span><strong>Buy $GTA6 ↗</strong>
           </a>
-          <a class="social-link" href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer">
-            <span>Telegram</span><strong>Join the CTO</strong>
+          <a class="social-link social-telegram" href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer">
+            <span>Telegram</span><strong>Join the CTO ↗</strong>
+          </a>
+          <a class="social-link" href="https://x.com/GTA_6_Sol" target="_blank" rel="noopener noreferrer">
+            <span>X</span><strong>Follow @GTA_6_Sol ↗</strong>
           </a>
         </div>
       </div>
@@ -297,6 +361,6 @@
   </aside>
 
   <div class="toast" id="toast" role="status" aria-live="polite">Contract copied</div>
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

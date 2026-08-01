@@ -1,5 +1,6 @@
 const CONTRACT = "EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump";
 const RELEASE_DATE = new Date("2026-11-19T00:00:00");
+const DEXSCREENER_PAIR_API = "https://api.dexscreener.com/latest/dex/pairs/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a";
 
 const pad = (number, length = 2) => String(Math.max(0, number)).padStart(length, "0");
 
@@ -53,28 +54,80 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-const copyButton = document.getElementById("copyContract");
-const copyText = document.getElementById("copyText");
+const marketPrice = document.getElementById("marketPrice");
+const marketCap = document.getElementById("marketCap");
+const marketLiquidity = document.getElementById("marketLiquidity");
+const marketVolume = document.getElementById("marketVolume");
+const marketChange = document.getElementById("marketChange");
+const marketUpdated = document.getElementById("marketUpdated");
+
+const compactCurrency = value => {
+  if (!Number.isFinite(Number(value))) return "—";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+    maximumFractionDigits: 2
+  }).format(Number(value));
+};
+
+const tokenPrice = value => {
+  const price = Number(value);
+  if (!Number.isFinite(price)) return "—";
+  const digits = price >= 1 ? 2 : price >= .01 ? 4 : 8;
+  return `$${price.toLocaleString("en-US", { maximumFractionDigits: digits })}`;
+};
+
+async function updateMarketStats() {
+  try {
+    const response = await fetch(DEXSCREENER_PAIR_API, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Dexscreener returned ${response.status}`);
+    const data = await response.json();
+    const pair = data.pair || data.pairs?.[0];
+    if (!pair) throw new Error("Market pair unavailable");
+
+    const change = Number(pair.priceChange?.h24);
+    marketPrice.textContent = tokenPrice(pair.priceUsd);
+    marketCap.textContent = compactCurrency(pair.marketCap || pair.fdv);
+    marketLiquidity.textContent = compactCurrency(pair.liquidity?.usd);
+    marketVolume.textContent = compactCurrency(pair.volume?.h24);
+    marketChange.textContent = Number.isFinite(change) ? `${change >= 0 ? "+" : ""}${change.toFixed(2)}%` : "—";
+    marketChange.classList.toggle("positive", change >= 0);
+    marketChange.classList.toggle("negative", change < 0);
+    marketUpdated.textContent = `Live Dexscreener data · updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+  } catch {
+    marketUpdated.textContent = "Live figures temporarily unavailable · open Dexscreener for current data";
+  }
+}
+
+updateMarketStats();
+setInterval(updateMarketStats, 30000);
+
 const toast = document.getElementById("toast");
 
-copyButton.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(CONTRACT);
-  } catch {
-    const area = document.createElement("textarea");
-    area.value = CONTRACT;
-    document.body.appendChild(area);
-    area.select();
-    document.execCommand("copy");
-    area.remove();
-  }
+document.querySelectorAll("[data-copy-contract]").forEach(copyButton => {
+  const copyText = copyButton.querySelector("span");
+  const defaultText = copyText.textContent;
 
-  copyText.textContent = "Copied";
-  toast.classList.add("show");
-  setTimeout(() => {
-    copyText.textContent = "Copy";
-    toast.classList.remove("show");
-  }, 1800);
+  copyButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(CONTRACT);
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = CONTRACT;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+
+    copyText.textContent = "Copied";
+    toast.classList.add("show");
+    setTimeout(() => {
+      copyText.textContent = defaultText;
+      toast.classList.remove("show");
+    }, 1800);
+  });
 });
 
 const observer = new IntersectionObserver(
