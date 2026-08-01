@@ -91,10 +91,10 @@ document.querySelectorAll(".reveal").forEach(element => observer.observe(element
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const RADIO_STATIONS = [
-  { name: "Planet X", artist: "LIL MORĪ", frequency: "101.6", file: "assets/audio/lil-mori-planet-x.mp3" },
-  { name: "VHS", artist: "Sci Fi Cyberpunk", frequency: "98.3", file: "assets/audio/sci-fi-cyberpunk-vhs.mp3" },
   { name: "Interface", artist: "Three Chain Links", frequency: "104.2", file: "assets/audio/three-chain-links-interface.mp3" },
-  { name: "Synthetic Pleasures", artist: "MOKKA", frequency: "88.6", file: "assets/audio/mokka-synthetic-pleasures.mp3" }
+  { name: "Synthetic Pleasures", artist: "MOKKA", frequency: "88.6", file: "assets/audio/mokka-synthetic-pleasures.mp3" },
+  { name: "Planet X", artist: "LIL MORĪ", frequency: "101.6", file: "assets/audio/lil-mori-planet-x.mp3" },
+  { name: "VHS", artist: "Sci Fi Cyberpunk", frequency: "98.3", file: "assets/audio/sci-fi-cyberpunk-vhs.mp3" }
 ];
 
 const radio = document.getElementById("radio");
