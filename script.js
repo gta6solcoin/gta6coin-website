@@ -3,6 +3,31 @@ const RELEASE_DATE = new Date("2026-11-19T00:00:00");
 
 const pad = (number, length = 2) => String(Math.max(0, number)).padStart(length, "0");
 
+const siteHeader = document.querySelector(".site-header");
+const menuToggle = document.getElementById("menuToggle");
+const mainNavigation = document.getElementById("mainNavigation");
+
+function closeSectionMenu() {
+  siteHeader.classList.remove("menu-open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Open section menu");
+}
+
+menuToggle.addEventListener("click", event => {
+  event.stopPropagation();
+  const open = siteHeader.classList.toggle("menu-open");
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute("aria-label", open ? "Close section menu" : "Open section menu");
+});
+
+mainNavigation.querySelectorAll("a").forEach(link => link.addEventListener("click", closeSectionMenu));
+document.addEventListener("click", event => {
+  if (!siteHeader.contains(event.target)) closeSectionMenu();
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeSectionMenu();
+});
+
 function updateCountdown() {
   const distance = RELEASE_DATE.getTime() - Date.now();
 
