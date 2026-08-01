@@ -64,3 +64,124 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
 document.getElementById("year").textContent = new Date().getFullYear();
+
+const RADIO_STATIONS = [
+  { name: "Planet X", artist: "LIL MORĪ", frequency: "101.6", file: "assets/audio/lil-mori-planet-x.mp3" },
+  { name: "VHS", artist: "Sci Fi Cyberpunk", frequency: "98.3", file: "assets/audio/sci-fi-cyberpunk-vhs.mp3" },
+  { name: "Interface", artist: "Three Chain Links", frequency: "104.2", file: "assets/audio/three-chain-links-interface.mp3" },
+  { name: "Synthetic Pleasures", artist: "MOKKA", frequency: "88.6", file: "assets/audio/mokka-synthetic-pleasures.mp3" }
+];
+
+const radio = document.getElementById("radio");
+const radioPanel = document.getElementById("radioPanel");
+const radioFab = document.getElementById("radioFab");
+const radioClose = document.getElementById("radioClose");
+const radioPlay = document.getElementById("radioPlay");
+const radioPrevious = document.getElementById("radioPrevious");
+const radioNext = document.getElementById("radioNext");
+const radioVolume = document.getElementById("radioVolume");
+const radioStations = document.getElementById("radioStations");
+const radioStation = document.getElementById("radioStation");
+const radioGenre = document.getElementById("radioGenre");
+const radioFabStation = document.getElementById("radioFabStation");
+
+let stationIndex = 0;
+let radioIsPlaying = false;
+const radioAudio = new Audio(RADIO_STATIONS[0].file);
+radioAudio.preload = "metadata";
+radioAudio.volume = Number(radioVolume.value) / 100;
+
+function updateRadioStation() {
+  const station = RADIO_STATIONS[stationIndex];
+  radioStation.textContent = station.name;
+  radioFabStation.textContent = station.name;
+  radioGenre.textContent = `${station.artist} · ${station.frequency} FM`;
+  document.querySelectorAll(".radio-station").forEach((button, index) => {
+    button.classList.toggle("active", index === stationIndex);
+    button.setAttribute("aria-pressed", index === stationIndex ? "true" : "false");
+  });
+}
+
+async function setStation(index) {
+  const wasPlaying = radioIsPlaying;
+  stationIndex = (index + RADIO_STATIONS.length) % RADIO_STATIONS.length;
+  radioAudio.src = RADIO_STATIONS[stationIndex].file;
+  radioAudio.load();
+  updateRadioStation();
+  if (wasPlaying) {
+    try {
+      await radioAudio.play();
+    } catch {
+      setRadioPlaying(false);
+    }
+  }
+}
+
+function setRadioPlaying(playing) {
+  radioIsPlaying = playing;
+  radio.classList.toggle("playing", playing);
+  radioPlay.textContent = playing ? "❚❚" : "▶";
+  radioPlay.setAttribute("aria-label", playing ? "Pause radio" : "Play radio");
+  radioPlay.setAttribute("aria-pressed", String(playing));
+}
+
+RADIO_STATIONS.forEach((station, index) => {
+  const button = document.createElement("button");
+  button.className = "radio-station";
+  button.type = "button";
+  button.innerHTML = `<strong>${station.name}</strong><small>${station.artist}</small>`;
+  button.addEventListener("click", () => setStation(index));
+  radioStations.appendChild(button);
+});
+
+radioFab.addEventListener("click", () => {
+  const open = radio.classList.toggle("open");
+  radioFab.setAttribute("aria-expanded", String(open));
+  radioPanel.setAttribute("aria-hidden", String(!open));
+});
+
+radioClose.addEventListener("click", () => {
+  radio.classList.remove("open");
+  radioFab.setAttribute("aria-expanded", "false");
+  radioPanel.setAttribute("aria-hidden", "true");
+  radioFab.focus();
+});
+
+radioPlay.addEventListener("click", async () => {
+  if (radioIsPlaying) {
+    radioAudio.pause();
+    setRadioPlaying(false);
+  } else {
+    try {
+      await radioAudio.play();
+      setRadioPlaying(true);
+    } catch {
+      setRadioPlaying(false);
+    }
+  }
+});
+
+radioPrevious.addEventListener("click", () => setStation(stationIndex - 1));
+radioNext.addEventListener("click", () => setStation(stationIndex + 1));
+radioVolume.addEventListener("input", () => {
+  radioAudio.volume = Number(radioVolume.value) / 100;
+});
+radioAudio.addEventListener("ended", () => setStation(stationIndex + 1));
+radioAudio.addEventListener("error", () => setRadioPlaying(false));
+
+updateRadioStation();
+
+async function startRadioSoftly() {
+  if (radioIsPlaying) return;
+  try {
+    await radioAudio.play();
+    setRadioPlaying(true);
+    document.removeEventListener("pointerdown", startRadioSoftly);
+    document.removeEventListener("keydown", startRadioSoftly);
+  } catch {
+    document.addEventListener("pointerdown", startRadioSoftly, { once: true });
+    document.addEventListener("keydown", startRadioSoftly, { once: true });
+  }
+}
+
+startRadioSoftly();

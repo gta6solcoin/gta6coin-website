@@ -7,7 +7,7 @@
   <meta name="description" content="GTA 6 Coin is a community-led Solana memecoin. Join the $GTA6 CTO community." />
   <meta property="og:title" content="GTA 6 Coin | $GTA6" />
   <meta property="og:description" content="The community-led $GTA6 memecoin on Solana." />
-  <meta property="og:image" content="assets/banner.png" />
+  <meta property="og:image" content="assets/hero-city-characters.png" />
   <meta property="og:type" content="website" />
   <title>GTA 6 Coin | $GTA6</title>
   <link rel="icon" href="assets/logo.png" />
@@ -24,72 +24,108 @@
       <span>GTA 6 Coin</span>
     </a>
 
-    <nav aria-label="Main navigation">
-      <a href="#about">About</a>
+    <nav class="header-nav" aria-label="Main navigation">
       <a href="#countdown">Countdown</a>
+      <a href="#market">Chart</a>
+      <a href="#about">About</a>
       <a href="#how-to-buy">How to buy</a>
     </nav>
 
-    <a class="button button-small button-ghost" href="https://x.com/GTA_6_Sol" target="_blank" rel="noopener noreferrer">
-      Follow on X
-    </a>
+    <div class="header-socials" aria-label="Community links">
+      <a href="https://x.com/GTA_6_Sol" target="_blank" rel="noopener noreferrer" aria-label="Follow GTA6 Coin on X">X</a>
+      <a href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer" aria-label="Join GTA6 Coin on Telegram">Telegram</a>
+      <a class="header-dex" href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer">Dexscreener ↗</a>
+    </div>
   </header>
 
   <main>
     <section class="hero" id="home">
       <div class="hero-image-wrap">
-        <img class="hero-image" src="assets/banner.png" alt="Neon city skyline with VI artwork" />
+        <img class="hero-image" src="assets/hero-city-characters.png" alt="Neon coastal city with two characters and police cars" />
         <div class="hero-vignette"></div>
       </div>
 
-      <div class="hero-content reveal">
+      <div class="hero-showcase reveal">
+        <div class="tv-frame" aria-label="GTA6 Coin loading screen animation">
+          <div class="tv-topbar">
+            <span><i></i> GTA6 CTO Broadcast</span>
+            <span>Channel VI</span>
+          </div>
+          <div class="tv-screen">
+            <img src="assets/gta6-loading-screen.gif" alt="Animated GTA6 Coin loading screen" />
+            <div class="tv-scanlines" aria-hidden="true"></div>
+            <div class="tv-glare" aria-hidden="true"></div>
+          </div>
+          <div class="tv-controls" aria-hidden="true">
+            <span>Now loading the next chapter</span>
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+
+        <div class="hero-countdown" id="countdown">
+          <div class="hero-countdown-heading">
+            <span>The clock is running</span>
+            <h1>Countdown to the next chapter</h1>
+          </div>
+          <div class="countdown" aria-label="Countdown to November 19, 2026">
+            <div class="time-card"><strong id="days">000</strong><span>Days</span></div>
+            <div class="time-card"><strong id="hours">00</strong><span>Hours</span></div>
+            <div class="time-card"><strong id="minutes">00</strong><span>Minutes</span></div>
+            <div class="time-card"><strong id="seconds">00</strong><span>Seconds</span></div>
+          </div>
+          <p class="release-note">Target date: 19 November 2026</p>
+        </div>
+
+        <div class="hero-utility">
+          <div class="hero-actions">
+            <a class="button button-primary" href="#market">View chart</a>
+            <a class="button button-ghost" href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer">Join Telegram</a>
+          </div>
+
+          <div class="contract-card">
+            <div>
+              <span class="contract-label">Solana contract address</span>
+              <code id="contract">EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump</code>
+            </div>
+            <button class="copy-button" id="copyContract" type="button" aria-label="Copy contract address"><span id="copyText">Copy</span></button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="section cto-intro-section">
+      <div class="cto-intro reveal">
         <div class="eyebrow"><span></span> Community Takeover on Solana</div>
-        <h1>The countdown<br />belongs to the <em>community.</em></h1>
+        <h2>The countdown belongs to the <em>community.</em></h2>
         <p>
           GTA 6 Coin is the community-powered memecoin built around the anticipation,
           culture and unstoppable momentum of the next era.
         </p>
-
-        <div class="hero-actions">
-          <a class="button button-primary" href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer">
-            View chart
-          </a>
-          <a class="button button-ghost" href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer">
-            Join Telegram
-          </a>
-        </div>
-
-        <div class="contract-card">
-          <div>
-            <span class="contract-label">Solana contract address</span>
-            <code id="contract">EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump</code>
-          </div>
-          <button class="copy-button" id="copyContract" type="button" aria-label="Copy contract address">
-            <span id="copyText">Copy</span>
-          </button>
-        </div>
       </div>
-
-      <a class="scroll-cue" href="#countdown" aria-label="Scroll to countdown">
-        <span></span>
-      </a>
     </section>
 
-    <section class="section countdown-section" id="countdown">
+    <section class="section market-section" id="market">
       <div class="section-heading reveal">
-        <div class="eyebrow"><span></span> The clock is running</div>
-        <h2>Countdown to the next chapter</h2>
-        <p>Every second brings the narrative closer.</p>
+        <div class="eyebrow"><span></span> Live on Solana</div>
+        <h2>Follow the market</h2>
+        <p>Live price action and trading data powered by Dexscreener.</p>
       </div>
 
-      <div class="countdown reveal" aria-label="Countdown to November 19, 2026">
-        <div class="time-card"><strong id="days">000</strong><span>Days</span></div>
-        <div class="time-card"><strong id="hours">00</strong><span>Hours</span></div>
-        <div class="time-card"><strong id="minutes">00</strong><span>Minutes</span></div>
-        <div class="time-card"><strong id="seconds">00</strong><span>Seconds</span></div>
+      <div class="chart-card reveal">
+        <div class="chart-card-header">
+          <div><span>Live chart</span><strong>$GTA6 / SOL</strong></div>
+          <a href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer" aria-label="Open GTA6 chart on Dexscreener">Dexscreener ↗</a>
+        </div>
+        <iframe
+          title="GTA6 live price chart on Dexscreener"
+          src="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a?embed=1&amp;theme=dark&amp;trades=0&amp;info=0"
+          loading="eager"
+          fetchpriority="high"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
       </div>
-
-      <p class="release-note reveal">Target date: 19 November 2026</p>
     </section>
 
     <section class="section about-section" id="about">
@@ -170,20 +206,73 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-brand">
-      <img src="assets/logo.png" alt="" />
-      <span>GTA 6 Coin</span>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <a class="footer-brand" href="#home" aria-label="Back to the top">
+        <img src="assets/logo.png" alt="" />
+        <span><strong>GTA 6 Coin</strong><small>Community Takeover · Solana</small></span>
+      </a>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#countdown">Countdown</a>
+        <a href="#market">Live chart</a>
+        <a href="#about">About</a>
+        <a href="#how-to-buy">How to buy</a>
+      </nav>
+
+      <div class="footer-socials">
+        <a href="https://x.com/GTA_6_Sol" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://t.me/gta6coinsolanaCTO" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="https://dexscreener.com/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a" target="_blank" rel="noopener noreferrer">Dexscreener</a>
+      </div>
     </div>
-    <p>
-      GTA 6 Coin is an unofficial community memecoin and is not affiliated with,
-      endorsed by or sponsored by Rockstar Games or Take-Two Interactive.
-      Cryptocurrency is highly volatile. Nothing on this website is financial advice.
-    </p>
-    <span>© <span id="year"></span> GTA 6 Coin Community</span>
+
+    <p class="footer-disclaimer"><strong>Disclaimer:</strong> Unofficial community project; not affiliated with Rockstar Games or Take-Two. Crypto is volatile—always do your own research.</p>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> GTA 6 Coin Community</span>
+      <span>Built by the community, for the community.</span>
+    </div>
   </footer>
 
+  <aside class="radio" id="radio" aria-label="GTA6 community radio">
+    <section class="radio-panel" id="radioPanel" aria-hidden="true">
+      <div class="radio-panel-top">
+        <div>
+          <span class="radio-kicker">GTA6 Community Radio</span>
+          <strong id="radioStation">Vice Nights</strong>
+          <small id="radioGenre">Synthwave · 101.6 FM</small>
+        </div>
+        <button class="radio-close" id="radioClose" type="button" aria-label="Close radio">×</button>
+      </div>
+
+      <div class="radio-visualizer" id="radioVisualizer" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <div class="radio-controls">
+        <button id="radioPrevious" type="button" aria-label="Previous station">‹</button>
+        <button class="radio-play" id="radioPlay" type="button" aria-label="Play radio" aria-pressed="false">▶</button>
+        <button id="radioNext" type="button" aria-label="Next station">›</button>
+      </div>
+
+      <label class="radio-volume">
+        <span>Volume</span>
+        <input id="radioVolume" type="range" min="0" max="100" value="25" aria-label="Radio volume" />
+      </label>
+
+      <div class="radio-stations" id="radioStations" aria-label="Choose a station"></div>
+      <p class="radio-note">Royalty-free synthwave · starts softly</p>
+    </section>
+
+    <button class="radio-fab" id="radioFab" type="button" aria-expanded="false" aria-controls="radioPanel">
+      <span class="radio-fab-icon" aria-hidden="true">♫</span>
+      <span><small>GTA6 Radio</small><strong id="radioFabStation">Vice Nights</strong></span>
+      <i class="radio-live" aria-hidden="true"></i>
+    </button>
+  </aside>
+
   <div class="toast" id="toast" role="status" aria-live="polite">Contract copied</div>
-  <script src="script.js"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
