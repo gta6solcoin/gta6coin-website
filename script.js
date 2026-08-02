@@ -1,13 +1,16 @@
 const CONTRACT = "EaxAUcXxNnVwcqm2BBocbows7D1XVY2Q63V38NEypump";
 const RELEASE_DATE = new Date("2026-11-19T00:00:00");
 const DEXSCREENER_PAIR_API = "https://api.dexscreener.com/latest/dex/pairs/solana/9kgswjrkczs3ebukvbkbgdwj8bwtdwzzqxkufdhaps2a";
+const SHOW_FULL_STICKY_COUNTDOWN = true;
 
 const pad = (number, length = 2) => String(Math.max(0, number)).padStart(length, "0");
 
 const siteHeader = document.querySelector(".site-header");
 const menuToggle = document.getElementById("menuToggle");
 const mainNavigation = document.getElementById("mainNavigation");
-const headerDays = document.getElementById("headerDays");
+const headerDayCount = document.getElementById("headerDayCount");
+const headerTimeCount = document.getElementById("headerTimeCount");
+headerTimeCount.hidden = !SHOW_FULL_STICKY_COUNTDOWN;
 
 function closeSectionMenu() {
   siteHeader.classList.remove("menu-open");
@@ -42,7 +45,8 @@ function updateCountdown() {
 
   if (distance <= 0) {
     document.getElementById("days").textContent = "000";
-    headerDays.textContent = "000";
+    headerDayCount.textContent = "000 days";
+    headerTimeCount.textContent = "00:00:00";
     document.getElementById("hours").textContent = "00";
     document.getElementById("minutes").textContent = "00";
     document.getElementById("seconds").textContent = "00";
@@ -55,10 +59,11 @@ function updateCountdown() {
   const seconds = Math.floor((distance % 60000) / 1000);
 
   document.getElementById("days").textContent = pad(days, 3);
-  headerDays.textContent = pad(days, 3);
   document.getElementById("hours").textContent = pad(hours);
   document.getElementById("minutes").textContent = pad(minutes);
   document.getElementById("seconds").textContent = pad(seconds);
+  headerDayCount.textContent = `${pad(days, 3)} days`;
+  headerTimeCount.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 }
 
 updateCountdown();
@@ -173,9 +178,9 @@ const radioStation = document.getElementById("radioStation");
 const radioGenre = document.getElementById("radioGenre");
 const radioFabStation = document.getElementById("radioFabStation");
 
-let stationIndex = 0;
+let stationIndex = Math.floor(Math.random() * RADIO_STATIONS.length);
 let radioIsPlaying = false;
-const radioAudio = new Audio(RADIO_STATIONS[0].file);
+const radioAudio = new Audio(RADIO_STATIONS[stationIndex].file);
 radioAudio.preload = "metadata";
 radioAudio.volume = Number(radioVolume.value) / 100;
 
@@ -259,17 +264,20 @@ radioAudio.addEventListener("error", () => setRadioPlaying(false));
 
 updateRadioStation();
 
-async function startRadioSoftly() {
+async function startRadioAfterInteraction(event) {
+  document.removeEventListener("pointerdown", startRadioAfterInteraction);
+  document.removeEventListener("keydown", startRadioAfterInteraction);
+
+  if (event.target instanceof Element && event.target.closest(".radio")) return;
   if (radioIsPlaying) return;
+
   try {
     await radioAudio.play();
     setRadioPlaying(true);
-    document.removeEventListener("pointerdown", startRadioSoftly);
-    document.removeEventListener("keydown", startRadioSoftly);
   } catch {
-    document.addEventListener("pointerdown", startRadioSoftly, { once: true });
-    document.addEventListener("keydown", startRadioSoftly, { once: true });
+    setRadioPlaying(false);
   }
 }
 
-startRadioSoftly();
+document.addEventListener("pointerdown", startRadioAfterInteraction, { once: true });
+document.addEventListener("keydown", startRadioAfterInteraction, { once: true });
